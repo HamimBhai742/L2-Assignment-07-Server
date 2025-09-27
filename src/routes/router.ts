@@ -1,0 +1,6 @@
+const router=[
+  {
+    path:'user',
+    
+  }
+]
