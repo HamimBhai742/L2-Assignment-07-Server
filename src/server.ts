@@ -2,6 +2,7 @@ import { Server } from 'http';
 import { app } from './app';
 import { prisma } from './config/prisma.db';
 import { env } from './config/env';
+import { seedAdmin } from './utils/seed.admin';
 
 let server: Server;
 const connectDB = async () => {
@@ -25,6 +26,7 @@ const startServer = () => {
   }
 };
 
-startServer()
-
-
+(() => {
+  startServer();
+  seedAdmin()
+})();

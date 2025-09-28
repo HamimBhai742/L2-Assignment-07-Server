@@ -3,7 +3,7 @@ import { userRouter } from '../models/user/user.routes';
 export const router = Router();
 const routes = [
   {
-    path: 'user',
+    path: '/user',
     router: userRouter,
   },
 ];
