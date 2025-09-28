@@ -4,4 +4,6 @@ export const env = {
   BCRYPTJS_SALT: Number(process.env.BCRYPTJS_SALT),
   ADMIN_EMAIL: process.env.ADMIN_EMAIL as string,
   ADMIN_PASSWORD: process.env.ADMIN_PASSWORD as string,
+  JWT_SECRET: process.env.JWT_SECRET as string,
+  JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN as string,
 };
