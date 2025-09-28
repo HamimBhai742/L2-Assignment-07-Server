@@ -7,4 +7,5 @@ export const env = {
   JWT_SECRET: process.env.JWT_SECRET as string,
   JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN as string,
   EXPRESS_SESSION_SECRET: process.env.EXPRESS_SESSION_SECRET as string,
+  NODE_ENV: process.env.NODE_ENV as string,
 };

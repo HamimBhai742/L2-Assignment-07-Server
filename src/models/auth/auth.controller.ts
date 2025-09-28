@@ -4,8 +4,9 @@ import passport from 'passport';
 import { AppError } from '../../error/coustom.error';
 import httpStatusCode from 'http-status-codes';
 import { createUserToken } from '../../utils/create.user.token';
-import { setCookies } from '../../utils/setCookies';
+import { setCookies } from '../../utils/set.cookies';
 import { sendResponse } from '../../utils/send.response';
+import { authServices } from './auth.services';
 
 const loginWithEmailAndPass = createAsyncFn(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -33,6 +34,49 @@ const loginWithEmailAndPass = createAsyncFn(
   }
 );
 
+const verifyUser = createAsyncFn(
+  async (req: Request, res: Response, next: NextFunction) => {
+    sendResponse(res, {
+      statusCode: httpStatusCode.OK,
+      success: true,
+      message: 'User logged in',
+      data: req.user,
+    });
+  }
+);
+
+const getMe = createAsyncFn(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const user = await authServices.getMe();
+    sendResponse(res, {
+      statusCode: httpStatusCode.OK,
+      success: true,
+      message: 'Get me',
+      data: user,
+    });
+  }
+);
+
+const logout = createAsyncFn(
+  async (req: Request, res: Response, next: NextFunction) => {
+    res.clearCookie('accessToken', {
+      httpOnly: true,
+      secure: false,
+      // sameSite: 'none',
+    });
+
+    sendResponse(res, {
+      statusCode: httpStatusCode.OK,
+      success: true,
+      message: 'User logged out successfully',
+      data: null,
+    });
+  }
+);
+
 export const authController = {
   loginWithEmailAndPass,
+  getMe,
+  verifyUser,
+  logout,
 };

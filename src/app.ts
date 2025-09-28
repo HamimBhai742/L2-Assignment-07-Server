@@ -7,7 +7,9 @@ import './config/passport';
 import session from 'express-session';
 import passport from 'passport';
 import { env } from './config/env';
+import cookieParser from 'cookie-parser';
 export const app: Application = express();
+
 app.use(
   session({
     secret: env.EXPRESS_SESSION_SECRET,
@@ -15,11 +17,19 @@ app.use(
     saveUninitialized: false,
   })
 );
-app.use(cors());
+app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  cors({
+    origin: ['http://localhost:3000'], // frontend origin
+    credentials: true,
+  })
+);
+
 
 app.use('/api/a7', router);
 

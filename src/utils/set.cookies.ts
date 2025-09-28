@@ -5,10 +5,11 @@ interface TokenInfo {
 }
 export const setCookies = (res: Response, tokenInfo: TokenInfo) => {
   if (tokenInfo?.accessToken) {
-    res.cookie('accessToken', tokenInfo.accessToken, {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'none',
-    });
+   res.cookie('accessToken', tokenInfo.accessToken, {
+     httpOnly: true,
+     secure: false,
+    //  sameSite: 'none',
+    //  path:"/"
+   })
   }
 };
