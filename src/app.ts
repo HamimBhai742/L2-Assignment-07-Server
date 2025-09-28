@@ -3,10 +3,18 @@ import { router } from './routes/router';
 import { notFound } from './middleware/not.found';
 import { globalError } from './middleware/global.error';
 import cors from 'cors';
-import './config/passport'
+import './config/passport';
+import session from 'express-session';
 import passport from 'passport';
+import { env } from './config/env';
 export const app: Application = express();
-
+app.use(
+  session({
+    secret: env.EXPRESS_SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 app.use(cors());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -21,4 +29,4 @@ app.get('/', (req, res) => {
 
 app.use(globalError);
 
-app.use(notFound)
+app.use(notFound);
