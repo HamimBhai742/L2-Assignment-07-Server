@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { projectController } from './project.controller';
 import { checkAuth } from '../../middleware/jwt.verify';
-import { createProjectSchema } from './projects.schema';
+import { createProjectSchema, updateProjectSchema } from './projects.schema';
 import { validateRequest } from '../../middleware/validation.sachem';
 
 const router = Router();
@@ -14,5 +14,17 @@ router.post(
 );
 router.get('/', projectController.getAllProjects);
 router.get('/my-project', checkAuth('ADMIN'), projectController.getMyProjects);
+router.put(
+  '/update/:id',
+  checkAuth('ADMIN'),
+  validateRequest(updateProjectSchema),
+  projectController.updateProject
+);
+
+router.delete(
+  '/delete/:id',
+  checkAuth('ADMIN'),
+  projectController.deleteProject
+);
 
 export const projectRouter = router;

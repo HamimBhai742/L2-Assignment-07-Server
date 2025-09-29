@@ -52,7 +52,25 @@ const getAllProjects = createAsyncFn(
 const getMyProjects = createAsyncFn(
   async (req: Request, res: Response, next: NextFunction) => {
     const { userId } = req.user as JwtPayload;
-    const projects = await projectServices.getMyProjects(userId);
+    const sortBy = req.query.sortBy || 'createdAt';
+    const sortOrder = req.query.sortOrder || 'desc';
+    const search = req.query.search || '';
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
+    const filter = req.query || '';
+
+    for (const f of excludeFiled) {
+      delete filter[f];
+    }
+    const projects = await projectServices.getMyProjects(
+      userId,
+      filter,
+      page,
+      limit,
+      search as string,
+      sortBy as string,
+      sortOrder as 'asc' | 'desc'
+    );
     sendResponse(res, {
       statusCode: httpStatusCode.OK,
       success: true,
@@ -75,10 +93,23 @@ const updateProject = createAsyncFn(
   }
 );
 
-
+const deleteProject = createAsyncFn(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const id = Number(req.params.id);
+    const project = await projectServices.deleteProject(id);
+    sendResponse(res, {
+      statusCode: httpStatusCode.OK,
+      success: true,
+      message: 'Project deleted successfully',
+      data: project,
+    });
+  }
+);
 
 export const projectController = {
   createNewProject,
   getAllProjects,
   getMyProjects,
+  deleteProject,
+  updateProject,
 };

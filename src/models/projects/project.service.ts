@@ -63,16 +63,66 @@ const getAllProjects = async (
 };
 
 //get my projects
-const getMyProjects = async (userId: number) => {
-  const projects = await prisma.project.findMany({
-    where: {
-      userId,
+const getMyProjects = async (
+  userId: number,
+  filter: any,
+  page: number,
+  limit: number,
+  search: string,
+  sortBy: string,
+  sortOrder: 'asc' | 'desc'
+) => {
+  const where: any = {
+    AND: [
+      { userId },
+      search && {
+        OR: [
+          {
+            title: {
+              contains: search,
+              mode: 'insensitive',
+            },
+          },
+          {
+            description: {
+              contains: search,
+              mode: 'insensitive',
+            },
+          },
+        ],
+      },
+      filter && filter,
+    ].filter(Boolean),
+  };
+
+  const myProjects = await prisma.project.findMany({
+    where,
+    skip: (page - 1) * limit,
+    take: limit,
+    orderBy: {
+      [sortBy]: sortOrder,
     },
   });
-  return projects;
-}
 
-const updateProject = async (id: number, payload: Prisma.ProjectUpdateInput) => {
+  const total = await prisma.project.count({
+    where,
+  });
+
+  return {
+    myProjects,
+    metadata: {
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    },
+  };
+};
+
+const updateProject = async (
+  id: number,
+  payload: Prisma.ProjectUpdateInput
+) => {
   const projects = await prisma.project.update({
     where: {
       id,
