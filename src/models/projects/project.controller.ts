@@ -4,6 +4,7 @@ import { projectServices } from './project.service';
 import { sendResponse } from '../../utils/send.response';
 import httpStatusCode from 'http-status-codes';
 import { excludeFiled } from '../../utils/constain';
+import { JwtPayload } from 'jsonwebtoken';
 
 const createNewProject = createAsyncFn(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -29,7 +30,7 @@ const getAllProjects = createAsyncFn(
     for (const f of excludeFiled) {
       delete filter[f];
     }
-    
+
     const data = await projectServices.getAllProjects(
       filter,
       page,
@@ -48,7 +49,21 @@ const getAllProjects = createAsyncFn(
   }
 );
 
+const getMyProjects = createAsyncFn(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { userId } = req.user as JwtPayload;
+    const projects = await projectServices.getMyProjects(userId);
+    sendResponse(res, {
+      statusCode: httpStatusCode.OK,
+      success: true,
+      message: 'Projects fetched successfully',
+      data: projects,
+    });
+  }
+);
+
 export const projectController = {
   createNewProject,
   getAllProjects,
+getMyProjects
 };

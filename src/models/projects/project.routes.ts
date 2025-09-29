@@ -12,7 +12,7 @@ router.post(
   validateRequest(createProjectSchema),
   projectController.createNewProject
 );
-
 router.get('/', projectController.getAllProjects);
+router.get('/my-project', checkAuth('ADMIN'), projectController.getMyProjects);
 
 export const projectRouter = router;

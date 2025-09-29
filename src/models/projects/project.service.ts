@@ -8,6 +8,7 @@ const createNewProject = async (payload: Prisma.ProjectCreateInput) => {
   return projects;
 };
 
+//get for all
 const getAllProjects = async (
   filter: any,
   page: number,
@@ -49,6 +50,7 @@ const getAllProjects = async (
   const total = await prisma.project.count({
     where,
   });
+
   return {
     projects,
     metadata: {
@@ -60,7 +62,29 @@ const getAllProjects = async (
   };
 };
 
+//get my projects
+const getMyProjects = async (userId: number) => {
+  const projects = await prisma.project.findMany({
+    where: {
+      userId,
+    },
+  });
+  return projects;
+}
+
+const updateProject = async (id: number, payload: Prisma.ProjectUpdateInput) => {
+  const projects = await prisma.project.update({
+    where: {
+      id,
+    },
+    data: payload,
+  });
+  return projects;
+};
+
 export const projectServices = {
   createNewProject,
   getAllProjects,
+  getMyProjects,
+  updateProject
 };
