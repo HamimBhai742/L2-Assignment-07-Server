@@ -1,7 +1,10 @@
 import { Response } from 'express';
 
 interface IMetadata {
-  total: number;
+  total?: number;
+  page?: number;
+  limit?: number;
+  totalPages?: number;
 }
 interface IResponse<T> {
   success: boolean;

@@ -4,7 +4,7 @@ export const createProjectSchema = z.object({
   userId: z.number(),
   title: z.string(),
   thumbnail: z.url(),
-  description: z.string(),
+  description: z.string().min(200, { message: 'Description must be at least 200 characters' }),
   technologies: z.array(z.string()),
   status: z.enum(['completed', 'in_progress', 'planned']),
   githubUrl: z.url(),
