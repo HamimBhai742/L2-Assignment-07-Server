@@ -62,8 +62,23 @@ const getMyProjects = createAsyncFn(
   }
 );
 
+const updateProject = createAsyncFn(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const id = Number(req.params.id);
+    const project = await projectServices.updateProject(id, req.body);
+    sendResponse(res, {
+      statusCode: httpStatusCode.OK,
+      success: true,
+      message: 'Project updated successfully',
+      data: project,
+    });
+  }
+);
+
+
+
 export const projectController = {
   createNewProject,
   getAllProjects,
-getMyProjects
+  getMyProjects,
 };
