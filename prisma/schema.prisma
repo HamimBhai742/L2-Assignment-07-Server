@@ -25,6 +25,34 @@ model User{
   updatedAt DateTime @updatedAt
 }
 
+model Project{
+  id Int @id @default(autoincrement())
+  title String
+  thumbnail String
+  description String
+  category Category
+  githubUrl String
+  liveUrl String
+  status ProjectStatus
+  technologies String[]
+  startDate DateTime
+  endDate DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum ProjectStatus{
+completed
+in_progress
+planned
+}
+
+enum Category{
+  web
+  api
+  mobile
+  other
+}
 enum Role{
   USER
   ADMIN
