@@ -18,6 +18,12 @@ export const globalError = (
       statusCode = httpStatusCode.BAD_REQUEST;
       message = `Duplicate value for field(s): ${err.meta?.target}`;
     }
+
+    // P2025 = Record not found
+    if (err.code === 'P2025') {
+      statusCode = httpStatusCode.NOT_FOUND;
+      message = 'Record not found';
+    }
   }
 
   if (err.name === 'PrismaClientValidationError') {

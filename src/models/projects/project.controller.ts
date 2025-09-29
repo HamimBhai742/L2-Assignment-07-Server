@@ -62,7 +62,7 @@ const getMyProjects = createAsyncFn(
     for (const f of excludeFiled) {
       delete filter[f];
     }
-    const projects = await projectServices.getMyProjects(
+    const data = await projectServices.getMyProjects(
       userId,
       filter,
       page,
@@ -75,7 +75,8 @@ const getMyProjects = createAsyncFn(
       statusCode: httpStatusCode.OK,
       success: true,
       message: 'Projects fetched successfully',
-      data: projects,
+      data: data.myProjects,
+      metaData: data.metadata,
     });
   }
 );

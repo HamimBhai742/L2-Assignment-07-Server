@@ -117,7 +117,19 @@ const getMyBlogs = async (
   };
 };
 
+const updateBlog = async (id: number, payload: Prisma.BlogUpdateInput) => {
+  const blog = await prisma.blog.update({
+    where: {
+      id,
+    },
+    data: payload,
+  });
+  return blog;
+};
+
 export const blogServices = {
   createBlog,
   getAllBlogs,
+  getMyBlogs,
+  updateBlog,
 };
