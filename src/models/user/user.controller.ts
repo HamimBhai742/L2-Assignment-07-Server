@@ -18,3 +18,7 @@ const updateProfile = createAsyncFn(
     });
   }
 );
+
+export const userController = {
+  updateProfile,
+};
