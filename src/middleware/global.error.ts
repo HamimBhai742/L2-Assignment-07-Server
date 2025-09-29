@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import { NextFunction, Request, Response } from 'express';
 import httpStatusCode from 'http-status-codes';
 export const globalError = (
@@ -10,6 +11,14 @@ export const globalError = (
   let message = err.message || 'Something went wrong';
   const errSource: any = [];
   console.log(err.name);
+
+  if (err instanceof Prisma.PrismaClientKnownRequestError) {
+    // P2002 = Unique constraint failed
+    if (err.code === 'P2002') {
+      statusCode = httpStatusCode.BAD_REQUEST;
+      message = `Duplicate value for field(s): ${err.meta?.target}`;
+    }
+  }
 
   if (err.name === 'PrismaClientValidationError') {
     statusCode = httpStatusCode.BAD_REQUEST;
