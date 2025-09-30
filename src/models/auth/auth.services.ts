@@ -1,4 +1,3 @@
-import { JwtPayload } from 'jsonwebtoken';
 import { prisma } from '../../config/prisma.db';
 const getMe = async () => {
   const user = await prisma.user.findUnique({

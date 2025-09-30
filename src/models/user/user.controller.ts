@@ -5,6 +5,19 @@ import { userService } from './user.service';
 import { sendResponse } from '../../utils/send.response';
 import httpStatusCode from 'http-status-codes';
 
+const getMyProfile = createAsyncFn(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { userId } = req.user as JwtPayload;
+    const profile = await userService.getMyProfile(userId);
+    sendResponse(res, {
+      statusCode: httpStatusCode.OK,
+      success: true,
+      message: 'Profile fetched successfully',
+      data: profile,
+    });
+  }
+)
+
 const updateProfile = createAsyncFn(
   async (req: Request, res: Response, next: NextFunction) => {
     const { userId } = req.user as JwtPayload;
@@ -21,4 +34,5 @@ const updateProfile = createAsyncFn(
 
 export const userController = {
   updateProfile,
+  getMyProfile,
 };

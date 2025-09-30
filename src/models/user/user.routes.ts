@@ -6,6 +6,8 @@ import { updateUserZodSchema } from './user.schema';
 
 const router = Router();
 
+router.get('/me', checkAuth('ADMIN'), userController.getMyProfile);
+
 router.put(
   '/update-profile',
   checkAuth('ADMIN'),

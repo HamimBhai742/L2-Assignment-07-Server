@@ -17,6 +17,7 @@ datasource db {
 model User{
   id Int @id @default(autoincrement())
   name String
+  profession Profession @default(full_stack_developer)
   email String @unique
   phone String?
   role Role @default(USER)
@@ -35,6 +36,7 @@ model User{
   projects Project[]
   blogs Blog[]
 }
+
 
 model Project{
   id Int @id @default(autoincrement())
@@ -67,6 +69,19 @@ model Blog{
   updatedAt DateTime @updatedAt
 }
 
+
+enum Profession{
+   digital_marketer
+  full_stack_developer
+  front_end_developer
+  back_end_developer
+  mobile_developer
+  ui_ux_designer
+  product_designer
+  data_analyst
+  data_engineer
+}
+
 enum BlogCategory {
   TECHNOLOGY
   PROGRAMMING
@@ -76,7 +91,6 @@ enum BlogCategory {
   EDUCATION
   BUSINESS
 }
-
 
 enum ProjectStatus{
 completed
