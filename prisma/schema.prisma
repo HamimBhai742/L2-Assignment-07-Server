@@ -95,6 +95,7 @@ enum BlogCategory {
   Food
   Education
   Business
+  Other
 }
 
 enum ProjectStatus{
