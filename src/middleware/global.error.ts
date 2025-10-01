@@ -10,7 +10,7 @@ export const globalError = (
   let statusCode = err.statusCode || 500;
   let message = err.message || 'Something went wrong';
   const errSource: any = [];
-  console.log(err.name);
+  console.log(err);
 
   if (err instanceof Prisma.PrismaClientKnownRequestError) {
     // P2002 = Unique constraint failed

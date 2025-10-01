@@ -45,6 +45,7 @@ model Project{
   title String
   thumbnail String
   description String
+  features String
   category Category
   githubUrl String
   liveUrl String
@@ -56,19 +57,21 @@ model Project{
   updatedAt DateTime @updatedAt
 }
 
-model Blog{
-  id Int @id @default(autoincrement())
-  title String @unique
-  category BlogCategory @default(TECHNOLOGY)
-  thumbnail String
-  description String
-  tags String[]
-  userId Int
-  user User @relation(fields: [userId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Blog {
+  id          Int   @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  thumbnail   String
+  description String?
+  content     String
+  category    BlogCategory @default(Web_Development)
+  tags        String[]
+  views       Int      @default(0)
+  userId      Int
+  user        User @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
-
 
 enum Profession{
    digital_marketer
@@ -83,13 +86,15 @@ enum Profession{
 }
 
 enum BlogCategory {
-  TECHNOLOGY
-  PROGRAMMING
-  LIFESTYLE
-  TRAVEL
-  FOOD
-  EDUCATION
-  BUSINESS
+  Technology
+  Web_Development
+  Programming
+  Lifestyle
+  Travel
+  Photography
+  Food
+  Education
+  Business
 }
 
 enum ProjectStatus{

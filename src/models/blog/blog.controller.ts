@@ -48,6 +48,19 @@ const getAllBlogs = createAsyncFn(
   }
 );
 
+const getBlog = createAsyncFn(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const slug = req.params.slug;
+    const blog = await blogServices.getBlog(slug);
+    sendResponse(res, {
+      statusCode: httpStatusCode.OK,
+      success: true,
+      message: 'Blog fetched successfully',
+      data: blog,
+    });
+  }
+);
+
 const getMyBlogs = createAsyncFn(
   async (req: Request, res: Response, next: NextFunction) => {
     const { userId } = req.user as JwtPayload;
@@ -109,6 +122,7 @@ const deleteBlog = createAsyncFn(
 export const blogController = {
   createBlog,
   getAllBlogs,
+  getBlog,
   getMyBlogs,
   updateBlog,
   deleteBlog,

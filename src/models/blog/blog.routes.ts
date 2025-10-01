@@ -13,6 +13,7 @@ router.post(
   blogController.createBlog
 );
 router.get('/', blogController.getAllBlogs);
+router.get('/:slug', blogController.getBlog);
 router.get('/my-blogs', checkAuth('ADMIN'), blogController.getMyBlogs);
 router.put(
   '/update/:id',

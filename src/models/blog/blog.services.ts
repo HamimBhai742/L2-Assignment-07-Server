@@ -1,7 +1,11 @@
 import { Prisma } from '@prisma/client';
 import { prisma } from '../../config/prisma.db';
+import { generateUniqueSlug } from '../../utils/generate.unique.slug';
 
 const createBlog = async (payload: Prisma.BlogCreateInput) => {
+  const slug = await generateUniqueSlug(payload.title);
+  payload.slug = slug;
+  console.log(slug);
   const blog = await prisma.blog.create({
     data: payload,
   });
@@ -61,6 +65,15 @@ const getAllBlogs = async (
   };
 };
 
+const getBlog = async (slug: string) => {
+  const blog = await prisma.blog.findUnique({
+    where: {
+      slug,
+    },
+  });
+  return blog;
+};
+
 const getMyBlogs = async (
   userId: number,
   filter: any,
@@ -118,6 +131,10 @@ const getMyBlogs = async (
 };
 
 const updateBlog = async (id: number, payload: Prisma.BlogUpdateInput) => {
+  if (payload?.title) {
+    const slug = await generateUniqueSlug(payload.title as string);
+    payload.slug = slug;
+  }
   const blog = await prisma.blog.update({
     where: {
       id,
@@ -136,11 +153,10 @@ const deleteBlog = async (id: number) => {
   return blog;
 };
 
-
-
 export const blogServices = {
   createBlog,
   getAllBlogs,
+  getBlog,
   getMyBlogs,
   updateBlog,
   deleteBlog,
