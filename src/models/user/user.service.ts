@@ -9,6 +9,7 @@ const getMyProfile = async (id: number) => {
   });
   return user;
 };
+
 const updateProfile = async (id: number, payload: Prisma.UserUpdateInput) => {
   const user = await prisma.user.update({
     where: {
