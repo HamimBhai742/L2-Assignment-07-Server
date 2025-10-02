@@ -22,6 +22,7 @@ export const createBlogSchema = z.object({
     'Other',
   ]),
   content: z.string().min(1, 'Content must be at least 100 characters'),
+  status: z.enum(['draft', 'published']).default('published'),
 });
 
 // Update Blog Schema

@@ -22,6 +22,7 @@ const getAllBlogs = async (
 ) => {
   const where: any = {
     AND: [
+      { status: 'published' },
       search && {
         OR: [
           {
@@ -66,12 +67,23 @@ const getAllBlogs = async (
 };
 
 const getBlog = async (slug: string) => {
-  const blog = await prisma.blog.findUnique({
-    where: {
-      slug,
-    },
+  return await prisma.$transaction(async (tx) => {
+    await tx.blog.update({
+      where: {
+        slug,
+      },
+      data: {
+        views: {
+          increment: 1,
+        },
+      },
+    });
+    return await tx.blog.findUnique({
+      where: {
+        slug,
+      },
+    });
   });
-  return blog;
 };
 
 const getMyBlogs = async (
@@ -115,10 +127,10 @@ const getMyBlogs = async (
     },
   });
 
-  const total = await prisma.project.count({
+  const total = await prisma.blog.count({
     where,
   });
-
+  console.log(myBlogs);
   return {
     myBlogs,
     metadata: {
@@ -128,6 +140,16 @@ const getMyBlogs = async (
       totalPages: Math.ceil(total / limit),
     },
   };
+};
+
+const getMyBlog = async (id: number, userId: number) => {
+  const myBlog = await prisma.blog.findUnique({
+    where: {
+      id,
+      userId,
+    },
+  });
+  return myBlog;
 };
 
 const updateBlog = async (id: number, payload: Prisma.BlogUpdateInput) => {
@@ -158,6 +180,7 @@ export const blogServices = {
   getAllBlogs,
   getBlog,
   getMyBlogs,
+  getMyBlog,
   updateBlog,
   deleteBlog,
 };

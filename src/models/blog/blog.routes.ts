@@ -12,9 +12,10 @@ router.post(
   validateRequest(createBlogSchema),
   blogController.createBlog
 );
+router.get('/my-blogs', checkAuth('ADMIN'), blogController.getMyBlogs);
+router.get('/my-blog/:id', checkAuth('ADMIN'), blogController.getMyBlog);
 router.get('/', blogController.getAllBlogs);
 router.get('/:slug', blogController.getBlog);
-router.get('/my-blogs', checkAuth('ADMIN'), blogController.getMyBlogs);
 router.put(
   '/update/:id',
   checkAuth('ADMIN'),
