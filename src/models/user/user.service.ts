@@ -46,10 +46,16 @@ const getUser = async () => {
   const user = await prisma.user.findFirst({
     select: {
       name: true,
+      email: true,
+      address:true,
       picture: true,
       profession: true,
       skills: true,
       bio: true,
+      role: true,
+      githubUrl: true,
+      facebookUrl: true,
+      linkedInUrl: true,
       createdAt: true,
       updatedAt: true,
     },
