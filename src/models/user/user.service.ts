@@ -27,6 +27,9 @@ const getAbout = async () => {
     },
     select: {
       name: true,
+      email: true,
+      phone: true,
+      address: true,
       picture: true,
       bio: true,
       githubUrl: true,
@@ -35,7 +38,8 @@ const getAbout = async () => {
       profession: true,
       skills: true,
       website: true,
-      
+      createdAt: true,
+      updatedAt: true,
     },
   });
   return user;

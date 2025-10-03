@@ -4,7 +4,7 @@ export const updateUserZodSchema = z.object({
   name: z.string().min(1, 'Name is required').optional(),
   phone: z.string().optional(),
   picture: z.url('Invalid URL').optional(),
-  about: z.string().optional(),
+  bio: z.string().optional(),
   address: z.string().optional(),
   skills: z.array(z.string()).optional(),
   website: z.url('Invalid website URL').optional(),
