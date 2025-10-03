@@ -44,8 +44,21 @@ const getAbout = createAsyncFn(
   }
 )
 
+const getUser= createAsyncFn(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const user = await userService.getUser();
+    sendResponse(res, {
+      statusCode: httpStatusCode.OK,
+      success: true,
+      message: 'User fetched successfully',
+      data: user,
+    });
+  }
+)
+
 export const userController = {
   updateProfile,
   getMyProfile,
-  getAbout
+  getAbout,
+  getUser
 };

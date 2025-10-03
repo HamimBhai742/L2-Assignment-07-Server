@@ -6,7 +6,6 @@ import httpStatusCode from 'http-status-codes';
 import { createUserToken } from '../../utils/create.user.token';
 import { setCookies } from '../../utils/set.cookies';
 import { sendResponse } from '../../utils/send.response';
-import { authServices } from './auth.services';
 
 const loginWithEmailAndPass = createAsyncFn(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -45,18 +44,6 @@ const verifyUser = createAsyncFn(
   }
 );
 
-const getMe = createAsyncFn(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const user = await authServices.getMe();
-    sendResponse(res, {
-      statusCode: httpStatusCode.OK,
-      success: true,
-      message: 'Get me',
-      data: user,
-    });
-  }
-);
-
 const logout = createAsyncFn(
   async (req: Request, res: Response, next: NextFunction) => {
     res.clearCookie('accessToken', {
@@ -76,7 +63,6 @@ const logout = createAsyncFn(
 
 export const authController = {
   loginWithEmailAndPass,
-  getMe,
   verifyUser,
   logout,
 };

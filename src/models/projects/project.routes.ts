@@ -13,7 +13,7 @@ router.post(
   projectController.createNewProject
 );
 router.get('/', projectController.getAllProjects);
-router.get('/my-project', checkAuth('ADMIN'), projectController.getMyProjects);
+router.get('/my-projects', checkAuth('ADMIN'), projectController.getMyProjects);
 router.put(
   '/update/:id',
   checkAuth('ADMIN'),

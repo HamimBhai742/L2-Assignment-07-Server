@@ -62,6 +62,7 @@ const getMyProjects = createAsyncFn(
     for (const f of excludeFiled) {
       delete filter[f];
     }
+    console.log(filter)
     const data = await projectServices.getMyProjects(
       userId,
       filter,

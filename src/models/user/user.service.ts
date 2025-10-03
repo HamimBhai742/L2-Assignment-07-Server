@@ -21,10 +21,7 @@ const updateProfile = async (id: number, payload: Prisma.UserUpdateInput) => {
 };
 
 const getAbout = async () => {
-  const user = await prisma.user.findUnique({
-    where: {
-      id: 1,
-    },
+  const user = await prisma.user.findFirst({
     select: {
       name: true,
       email: true,
@@ -45,8 +42,24 @@ const getAbout = async () => {
   return user;
 };
 
+const getUser = async () => {
+  const user = await prisma.user.findFirst({
+    select: {
+      name: true,
+      picture: true,
+      profession: true,
+      skills: true,
+      bio: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+  return user;
+};
+
 export const userService = {
   updateProfile,
   getMyProfile,
   getAbout,
+  getUser,
 };
