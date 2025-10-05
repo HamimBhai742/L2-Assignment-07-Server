@@ -211,25 +211,12 @@ The API accepts requests from:
 - Prisma ORM for type-safe database operations
 - Automatic migrations and schema management
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
-
-## 📄 License
-
-This project is licensed under the ISC License.
-
 ## 👨‍💻 Author
 
-**Md. Hamim**
+**Hamim**
 - Email: mdhamim5088@gmail.com
-- GitHub: [https://github.com/HamimBhai742]
-- LinkedIn: [https://www.linkedin.com/in/md-hamim42]
+- GitHub: https://github.com/HamimBhai742
+- LinkedIn: https://www.linkedin.com/in/md-hamim42
 
 ---
 
-⭐ Star this repository if you find it helpful!
