@@ -24,4 +24,5 @@ export const updateUserZodSchema = z.object({
       'data_engineer',
     ])
     .optional(),
+    experience: z.string().optional()
 });

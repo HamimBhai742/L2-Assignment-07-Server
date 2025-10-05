@@ -11,6 +11,7 @@ const getMyProfile = async (id: number) => {
 };
 
 const updateProfile = async (id: number, payload: Prisma.UserUpdateInput) => {
+  console.log(payload)
   const user = await prisma.user.update({
     where: {
       id,
@@ -50,9 +51,11 @@ const getUser = async () => {
       address:true,
       picture: true,
       profession: true,
+      experience: true,
       skills: true,
       bio: true,
       role: true,
+      projects: true,
       githubUrl: true,
       facebookUrl: true,
       linkedInUrl: true,

@@ -27,7 +27,7 @@ model User{
    bio String?
    address String?
   skills String[]
-  expreience Int?
+  experience String?
   website String?
   githubUrl String?
   linkedInUrl String?

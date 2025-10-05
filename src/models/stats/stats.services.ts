@@ -79,6 +79,24 @@ const stats = async () => {
       },
     });
 
+    const totalCompltedProjects = await tx.project.count({
+      where: {
+        status: 'completed',
+      },
+    });
+
+    const totalInProgressProjects = await tx.project.count({
+      where: {
+        status: 'in_progress',
+      },
+    });
+
+    const totalPlannedProjects = await tx.project.count({
+      where: {
+        status: 'planned',
+      },
+    });
+
     const totalPublishedBlogs = await tx.blog.count({
       where: {
         status: 'published',
@@ -107,6 +125,9 @@ const stats = async () => {
         totalProjects,
         lastWeekProjects,
         lastMonthProjects,
+        totalCompltedProjects,
+        totalInProgressProjects,
+        totalPlannedProjects,
       },
     };
   });
