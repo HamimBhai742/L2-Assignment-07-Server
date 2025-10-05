@@ -48,8 +48,8 @@ model Project{
   description String
   features String
   category Category
-  githubUrl String
-  liveUrl String
+  githubUrl String?
+  liveUrl String?
   status ProjectStatus
   technologies String[]
   startDate String

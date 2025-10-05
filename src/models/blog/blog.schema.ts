@@ -4,9 +4,7 @@ import { z } from 'zod';
 export const createBlogSchema = z.object({
   title: z.string().min(10, 'Title must be at least 10 characters'),
   thumbnail: z.url('Thumbnail must be a valid URL'),
-  description: z
-    .string()
-    .min(50, 'Description must be at least 50 characters'),
+  description: z.string().min(50, 'Description must be at least 50 characters'),
   tags: z.array(z.string()).nonempty('At least one tag is required'),
   userId: z.number().int().positive('User ID must be a positive integer'),
   category: z.enum([
@@ -48,5 +46,9 @@ export const updateBlogSchema = z.object({
       'Other',
     ])
     .optional(),
-  content: z.string().min(100, 'Content must be at least 100 characters').optional(),
+  content: z
+    .string()
+    .min(100, 'Content must be at least 100 characters')
+    .optional(),
+  status: z.enum(['draft', 'published']).optional(),
 });
