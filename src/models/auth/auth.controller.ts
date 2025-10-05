@@ -6,6 +6,7 @@ import httpStatusCode from 'http-status-codes';
 import { createUserToken } from '../../utils/create.user.token';
 import { setCookies } from '../../utils/set.cookies';
 import { sendResponse } from '../../utils/send.response';
+import { env } from '../../config/env';
 
 const loginWithEmailAndPass = createAsyncFn(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -48,8 +49,8 @@ const logout = createAsyncFn(
   async (req: Request, res: Response, next: NextFunction) => {
     res.clearCookie('accessToken', {
       httpOnly: true,
-      secure: false,
-      // sameSite: 'none',
+      secure: env.NODE_ENV==='production',
+      sameSite: env.NODE_ENV === 'production' ? 'none' : 'lax',
     });
 
     sendResponse(res, {

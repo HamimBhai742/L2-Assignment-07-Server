@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   cors({
-    origin: ['http://localhost:3000'], // frontend origin
+    origin: ['http://localhost:3000','https://assignment-07-gamma.vercel.app'], // frontend origin
     credentials: true,
   })
 );
