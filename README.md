@@ -3,7 +3,7 @@
 A robust backend API for managing personal portfolio websites with authentication, project showcase, blog management, and analytics.
 
 ## 🚀 Live Demo
-- **API Base URL**: `https://assignment-07-server.vercel.app/api/a7`
+- **API Base URL**: `https://assignment-07-server.vercel.app`
 - **Frontend**: `https://assignment-07-gamma.vercel.app`
 
 ## 📋 Overview
@@ -93,72 +93,11 @@ DELETE /api/a7/blog/:id          # Delete blog (Admin)
 GET  /api/a7/stats               # Get dashboard statistics
 ```
 
-## 🗄️ Database Schema
-
-### User Model
-```typescript
-{
-  id: number
-  name: string
-  profession: Profession
-  email: string (unique)
-  phone?: string
-  role: Role (USER/ADMIN)
-  password: string
-  picture?: string
-  bio?: string
-  address?: string
-  skills: string[]
-  experience?: number
-  website?: string
-  githubUrl?: string
-  linkedInUrl?: string
-  facebookUrl?: string
-}
-```
-
-### Project Model
-```typescript
-{
-  id: number
-  userId: number
-  title: string
-  thumbnail: string
-  description: string
-  features: string
-  category: Category
-  githubUrl: string
-  liveUrl: string
-  status: ProjectStatus
-  technologies: string[]
-  startDate: string
-  endDate?: string
-}
-```
-
-### Blog Model
-```typescript
-{
-  id: number
-  title: string
-  slug: string (unique)
-  thumbnail: string
-  description?: string
-  content: string
-  category: BlogCategory
-  tags: string[]
-  status: BlogStatus
-  views: number
-  userId: number
-}
-```
-
 ## 🚀 Setup Instructions
 
 ### Prerequisites
 - Node.js (v18 or higher)
 - PostgreSQL database
-- Cloudinary account
 
 ### 1. Clone Repository
 ```bash
@@ -256,12 +195,6 @@ src/
 - SQL injection prevention with Prisma
 - Secure session management
 
-## 📝 Important Notes
-
-### Default Admin Account
-- **Email**: `mdhamim5088@gmail.com`
-- **Password**: `Hamim@742`
-- **Role**: `ADMIN`
 
 ### CORS Configuration
 The API accepts requests from:
@@ -294,8 +227,8 @@ This project is licensed under the ISC License.
 
 **Md. Hamim**
 - Email: mdhamim5088@gmail.com
-- GitHub: [Your GitHub Profile]
-- LinkedIn: [Your LinkedIn Profile]
+- GitHub: `https://github.com/HamimBhai742`
+- LinkedIn: `https://www.linkedin.com/in/md-hamim42`
 
 ---
 
