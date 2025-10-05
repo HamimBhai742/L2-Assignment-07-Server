@@ -227,8 +227,8 @@ This project is licensed under the ISC License.
 
 **Md. Hamim**
 - Email: mdhamim5088@gmail.com
-- GitHub: `https://github.com/HamimBhai742`
-- LinkedIn: `https://www.linkedin.com/in/md-hamim42`
+- GitHub: [https://github.com/HamimBhai742]
+- LinkedIn: [https://www.linkedin.com/in/md-hamim42]
 
 ---
 
